@@ -1,0 +1,15 @@
+  
+labels:
+  actor: "ministore"
+actors:
+  - "localhost:5000/ministore:0.1.0"
+capabilities:
+  - image_ref: wasmcloud.azurecr.io/httpserver:0.12.1
+    link_name: default
+links:
+  - actor: ${CLIENT_ACTOR:MBG3V5EZID5E54ERAM7LB4GE7Z7Y6QTLC5DODKZQD24ESNISCVBNLOMA}
+    provider_id: "VAG3QITQQ2ODAOWB5TTQSDJ53XK3SHBEIFNK4AYJ5RKAX2UNSCAPHA5M"
+    contract_id: "wasmcloud:httpserver"
+    link_name: default
+    values:
+      PORT: 8080

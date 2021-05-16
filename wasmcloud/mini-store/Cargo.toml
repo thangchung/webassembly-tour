@@ -1,0 +1,18 @@
+[package]
+name = "mini-store"
+version = "0.1.0"
+authors = ["thangchung@ymail.com"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wapc-guest = "0.4.0"
+wasmcloud-actor-core = { version = "0.2.2", features = ["guest"] }
+wasmcloud-actor-http-server = {version = "0.1.0", features = ["guest"]}
+
+[profile.release]
+# Optimize for small code size
+opt-level = "s"
+lto = true
