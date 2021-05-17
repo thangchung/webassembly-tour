@@ -1,4 +1,3 @@
-  
 labels:
   actor: "ministore"
 actors:
@@ -7,7 +6,7 @@ capabilities:
   - image_ref: wasmcloud.azurecr.io/httpserver:0.12.1
     link_name: default
 links:
-  - actor: ${CLIENT_ACTOR:MBG3V5EZID5E54ERAM7LB4GE7Z7Y6QTLC5DODKZQD24ESNISCVBNLOMA}
+  - actor: ${CLIENT_ACTOR:MDCKTVOG57S7BJZFPQVO5UIXPVKV6KTE62ZD4LEDLYI2RZ3MEDPM7OYG}
     provider_id: "VAG3QITQQ2ODAOWB5TTQSDJ53XK3SHBEIFNK4AYJ5RKAX2UNSCAPHA5M"
     contract_id: "wasmcloud:httpserver"
     link_name: default
