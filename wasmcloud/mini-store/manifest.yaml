@@ -6,7 +6,7 @@ capabilities:
   - image_ref: wasmcloud.azurecr.io/httpserver:0.12.1
     link_name: default
 links:
-  - actor: ${CLIENT_ACTOR:MDCKTVOG57S7BJZFPQVO5UIXPVKV6KTE62ZD4LEDLYI2RZ3MEDPM7OYG}
+  - actor: ${CLIENT_ACTOR:MDIN3A5WRXNBIKIVMTTRV6CH6I4UQXRW4H6YIINZ4TMYOETYF5TTMJ7Z}
     provider_id: "VAG3QITQQ2ODAOWB5TTQSDJ53XK3SHBEIFNK4AYJ5RKAX2UNSCAPHA5M"
     contract_id: "wasmcloud:httpserver"
     link_name: default
