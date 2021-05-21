@@ -62,6 +62,7 @@ $ curl localhost:8080/add?5,5 --output -
 > it might not run well
 
 ```bash
+$ rustup target add wasm32-wasi
 $ cargo build --target wasm32-wasi --release
 $ wasmtime target/wasm32-wasi/release/mini_store.wasm
 ```

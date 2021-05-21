@@ -1,0 +1,4 @@
+[namespace]
+members = [
+    "wasmcloud/mini-store"
+]

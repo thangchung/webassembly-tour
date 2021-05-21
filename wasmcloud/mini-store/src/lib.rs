@@ -1,10 +1,9 @@
-use wasmcloud_actor_core as actor;
 extern crate wapc_guest as guest;
 extern crate wasmcloud_actor_http_server as httpserver;
 
 use guest::prelude::*;
 
-#[actor::init]
+#[wasmcloud_actor_core::init]
 fn init() {
     httpserver::Handlers::register_handle_request(test_body);
 }
