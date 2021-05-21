@@ -57,6 +57,21 @@ Finally, you can run
 $ curl localhost:8080/add?5,5 --output -
 ```
 
+> On the Ubuntu VM, you need to forward port of the docker-machine guest machine into the host machine as below
+
+```bash
+# pf.sh in the tools folder, and its repo is at https://github.com/johanhaleby/docker-machine-port-forwarder
+$ ./pf.sh 5000 && ./pf.sh 6379 && ./pf.sh 4222 & ./pf.sh 6222 &7 ./pf.sh 8222
+```
+
+> Push WebAssembly file with signed to Github package
+
+```bash
+# before do this, we need to login into Github package so plz follow the link https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-docker-registry
+# wasm-to-oci is at https://github.com/engineerd/wasm-to-oci
+$ wasm-to-oci push ../mini-store/target/wasm32-unknown-unknown/release/mini_store_s.wasm ghcr.io/thangchung/ministore:0.1.0
+```
+
 ## Run with wasmtime
 
 > it might not run well
