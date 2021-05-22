@@ -1,0 +1,190 @@
+@startmindmap wasm-tour
+
+title WebAssembly Tour
+caption Copyright by <i>@thangchung</i> \nhttps://github.com/thangchung/webassembly-tour
+
+skinparam shadowing false
+'skinparam handwritten true
+skinparam BackgroundColor white
+
+<style>
+title {
+  Margin 0 0 10
+  FontSize 24
+  FontColor blue
+}
+caption {
+  Margin 10 0 0
+  FontSize 12
+  FontColor blue
+}
+node {
+  Padding 12
+  Margin 3
+  HorizontalAlignment center
+  RoundCorner 40
+  MaximumWidth 200
+}
+leafNode {
+  RoundCorner 0
+  Padding 3
+  BackgroundColor none
+  Linecolor none
+}
+mindmapDiagram {
+  .mynotes_left {
+    BackgroundColor none
+    Linecolor none
+    HorizontalAlignment right
+  }
+  .mynotes_right {
+    BackgroundColor none
+    Linecolor none
+    HorizontalAlignment left
+  }
+}
+</style>
+
++ WASM \n(WebAssembly)
+++ WebAssembly: it's neither web, not assembly - Ancient wasm dev proverb
+
+++ Concepts
++++ Basic
+++++ callstack is inaccessible
+++++ <u>pointers:</u> compiled the offsets into linear memory (checked to ensure stating inbound), virtual address hides from application <<mynotes_right>>
+++++ <u>all control transfers:</u> direct and indirect branches and calls (check to make sure not outbound) <<mynotes_right>>
+++++ all interaction with outside world by imports and exports (no raw access) <<mynotes_right>>
+++++ no undefined behavior
++++ Filesystem access
+++++ WASI APIs for file system access
++++++ only access what we allow
++++++ share nothing linking and nano-processes (future)
++++ Terminal output
+++++ ANSI-style escape sequences
++++ Spectre
+++++ not implement yet, but it is a subject of on-going research
++++ https://docs.wasmtime.dev/security-sandboxing.html
+
+++ ecosystem
++++ Cloudflare - worker (node Isolation)
+++++ Build serverless code
++++++ https://github.com/cloudflare/wrangler
+++++ https://blog.cloudflare.com/cloud-computing-without-containers
+
++++ WASI
+++++ WebAssembly System Interface (has 2 benefits: portability and security)
+++++ Not have a networking layer
+++++ current WASM are single-thread and not support concurrency
+++++ CGI: attach scripts to website, and provide the dynamic server-side logic. And now WASM + WASI are the same
++++++ https://datatracker.ietf.org/doc/html/rfc3875
+++++ wasm32-wasi target
++++++ wasmtime
+++++++ https://github.com/bytecodealliance/cargo-wasi
+++++ wabt (convert wasm to wat, and vice versa)
++++++ https://github.com/WebAssembly/wabt
+++++ https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/
+
++++ wasmCloud
+++++ High level concepts
++++++ Middle Level Runtime
+++++++ waPC (WebAssembly Procedure Calls)
+++++++ wascap (Sign, Embed, Query JWTs in WebAssembly Modules)
++++++ High Level Runtime
+++++++ waSCC (WebAssembly Secure Capabilities Connector)
++++++++ services and functions as Actors <<mynotes_right>>
++++++++ Utilize embedded, signed JWTs (verify provenance, restrict access, integrate with OPA) <<mynotes_right>>
++++++++ Dynamically bind Actors to Capabilities such as Message Broker, HTTP client and server, Key-value Store, and Custom Capabilities <<mynotes_right>>
++++++++ Rust Host SDK
++++++++ Rust Actor SDK
+++++ wasmcloud shell
++++++ wash CLI
+++++++ start wash with `wash up`
+++++++ sub-commands
++++++++ claims
+++++++++ Generate JWTs for actors, capability providers, accounts and operators. Sign actor modules with claims including capability IDs, expiration, and keys to verify identity <<mynotes_right>>
+++++++++ for examples
++++++++++ call `wash claims inspect wasmcloud.azurecr.io/echo:0.2.1` to inspect the echo actor <<mynotes_right>>
++++++++++ or sign claims for actor like `claims sign ./table_tennis.wasm --http_server  --name "demo" --ver 0.1.0 --rev 0` <<mynotes_right>>
++++++++ ctl
+++++++++ Interact directly with a wasmcloud control-interface, allowing you to imperatively schedule actors, providers and modify configurations of a wasmcloud host <<mynotes_right>>
+++++++++ for examples
++++++++++ `ctl get hosts`
++++++++++ then based on the host id to call `ctl get inventory <host id>` <<mynotes_right>>
++++++++++ or we can start actor like `ctl start actor table_tennis_s.wasm`(_s mean the wasm file we have already signed it with `claims` sub-command) <<mynotes_right>>
++++++++++ or we can start the provider too, like `ctl start provider wasmcloud.azurecr.io/httpserver:0.12.1` <<mynotes_right>>
++++++++++ or we can link actor with provider like `ctl link <ACTOR-ID> <PROVIDER ID> wasmcloud:httpserver PORT=8080`, then we can `curl localhost:8080 -d "ping"` <<mynotes_right>>
++++++++ drain
+++++++++ Manage contents of the local wasmcloud cache <<mynotes_right>>
++++++++ keys
+++++++++ Generate ed25519 keys for securely signing and identifying wasmcloud entities (actors, providers, hosts) <<mynotes_right>>
++++++++ par
+++++++++ Create, modify and inspect provider archives, a TAR format that contains a signed JWT and OS/Architecture specific binaries for native capability providers <<mynotes_right>>
++++++++ reg
+++++++++ Push and Pull actors and capability providers to/from OCI compliant registries (registry with ORAS standard) <<mynotes_right>>
+++++ Develop app
++++++ manifest.yaml
+++++++ declare: name, labels, actors to run, capabilities (image_ref and link_name), links between actor and host also with port (actor, provider_id, contract_id, link_name, values) <<mynotes_right>>
++++++ More steps to run please see `wasmcloud/ministore/README.md`in this repository <<mynotes_right>>
+
++++ WAGI (Azure)
+++++ WebAssembly Gateway Interface (https://github.com/deislabs/wagi) and wasi-experimental-http <<mynotes_right>>
+++++ Http Server: dynamically load and execute WASM modules using the same CGI technic <<mynotes_right>>
+++++ Headers in env variables, Query params sends in command line options, Incoming HTTP payloads via STDIN, and Response via STDOUT <<mynotes_right>>
+++++ Security in mind: explicit access grants, cannot make outbound network connections, cannot execute others executes on the system, and cannot access arbitrary env variables <<mynotes_right>>
+++++ https://github.com/deislabs/wagi-azure-samples
+
++++ krustlet
+++++ [TODO]
+++++ https://github.com/deislabs/krustlet
+
++++ wasmer
+++++ WebAssembly Runtime supporting WASI and Emscripten
+++++ [TODO]
+++++ https://github.com/wasmerio/wasmer
+
++++ secondstate
+++++ [TODO]
+++++ https://www.secondstate.io/
+
++++ suborbital
+++++ [TODO]
+++++ https://github.com/suborbital/atmo
+
++++ lucet
+++++ Sandboxing WebAssembly Compiler
+++++ [TODO]
+++++ https://github.com/bytecodealliance/lucet
+
++++ wapm
+++++ [TODO]
+
++++ wasi-nn
+++++ [TODO]
+
++++ webassembly-dwarf
+++++ [TODO]
+++++ https://yurydelendik.github.io/webassembly-dwarf/
+
++++ AssemblyLift
+++++ A framework for building serverless applications powered by WebAssembly (AWS) <<mynotes_right>>
+++++ [TODO]
+++++ https://github.com/akkoro/assemblylift
+
++++ WebContainer (StackBlitz)
+++++ [TODO]
+++++ https://github.com/stackblitz/webcontainer-core
+
++++ Other tools
+++++ https://github.com/engineerd/wasm-to-oci
+++++ https://github.com/appcypher/awesome-wasm-runtimes
+++++ https://github.com/grain-lang/grain
+
+++ programming languages \n(LLVM family)
++++ Rust
++++ C/C++
++++ AssemblyScript (subset of Typescript)
++++ TinyGo
++++ swiftwasm
++++ pyodide (python)
+
+@endmindmap

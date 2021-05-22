@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+  plantuml-server:
+    image: "plantuml/plantuml-server:jetty"
+    container_name: plantuml-server
+    environment:
+      PLANTUML_LIMIT_SIZE: 8192
+    ports:
+      - 8080:8080
