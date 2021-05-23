@@ -11,6 +11,7 @@ If you like or are using this project to learn, please give a star. Thank you ve
 ## The picture of webassembly serverless
 
 ![](assets/wasm_serverless.jpg)
+Picture courtesy of [wasmCloud](https://wasmCloud.com) from Kubecon 2021 WasmDay [WebAssembly: The Future of Distributed Computing](https://www.youtube.com/watch?v=6UM64MbsHic) by Liam Randall.
 
 ## The full picture of WebAssembly ecosystem
 
