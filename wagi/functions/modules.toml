@@ -1,0 +1,5 @@
+default_host = "localhost:3000"
+
+[[module]]
+route = "/get-todos"
+module = "target/wasm32-wasi/debug/get-todos.wasm"
