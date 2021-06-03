@@ -126,12 +126,18 @@ mindmapDiagram {
 ++++++ declare: name, labels, actors to run, capabilities (image_ref and link_name), links between actor and host also with port (actor, provider_id, contract_id, link_name, values) <<mynotes_right>>
 +++++ More steps to run please see `wasmcloud/ministore/README.md`in this repository <<mynotes_right>>
 
-+++ WAGI (Azure)
-++++ WebAssembly Gateway Interface (https://github.com/deislabs/wagi) and wasi-experimental-http <<mynotes_right>>
++++ WAGI (DeisLabs - Azure)
+++++ WebAssembly Gateway Interface<<mynotes_right>>
 ++++ Http Server: dynamically load and execute WASM modules using the same CGI technic <<mynotes_right>>
 ++++ Headers in env variables, Query params sends in command line options, Incoming HTTP payloads via STDIN, and Response via STDOUT <<mynotes_right>>
 ++++ Security in mind: explicit access grants, cannot make outbound network connections, cannot execute others executes on the system, and cannot access arbitrary env variables <<mynotes_right>>
-++++ https://github.com/deislabs/wagi-azure-samples
+++++ It works on wasm32-wasi target only. If you want to install it, \nPlease follow command: rustup target add wasm32-wasi <<mynotes_right>>
+++++ There is a version that is written in Rust at the https://github.com/deislabs/wagi <<mynotes_right>>
+++++ DeisLabs is working to bring up .NET Core WAGI at https://github.com/deislabs/wagi-dotnet <<mynotes_right>>
+++++ See more examples at this reposioty in https://github.com/thangchung/webassembly-tour/tree/main/wagi <<mynotes_right>>
+++++ Networking API in WASI is not stable, and WASI socket is still in proposal stage
++++++ wasi-experimental-http is to temporary to solve this problem (will not need when WASI networking API and socket is released and stabled) <<mynotes_right>>
++++++ The DeisLabs build some of samples using wasi-experimental-http and Azure Rust SDKs (customized to work with WASI) at https://github.com/deislabs/wagi-azure-samples <<mynotes_right>>
 
 +++ krustlet
 ++++ [TODO]

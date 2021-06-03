@@ -5,6 +5,6 @@ services:
     image: "plantuml/plantuml-server:jetty"
     container_name: plantuml-server
     environment:
-      PLANTUML_LIMIT_SIZE: 8192
+      PLANTUML_LIMIT_SIZE: 24384
     ports:
       - 8080:8080
