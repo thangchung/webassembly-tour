@@ -1,0 +1,44 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/bin/Debug/net5.0/server.dll",
+      "args": [ ],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "env":{
+        "WASMTIME_BACKTRACE_DETAILS":"1",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "stopAtEntry": false
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    },
+    {
+      "name": ".NET Core Launch (listen)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "env":{
+        "WASMTIME_BACKTRACE_DETAILS":"1",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "program": "${workspaceFolder}/bin/Debug/net5.0/server.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    }
+  ]
+}

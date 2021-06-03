@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "server": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "WASMTIME_BACKTRACE_DETAILS":1
+      }
+    }
+  }
+}
