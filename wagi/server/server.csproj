@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Deislabs.WAGI" Version="0.3.0-preview" />
+    <PackageReference Include="Deislabs.WAGI" Version="0.4.0-preview" />
   </ItemGroup>
 
   <ItemGroup>
